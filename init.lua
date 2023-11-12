@@ -15,12 +15,33 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
+  {
+    "ThePrimeagen/harpoon",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      global_settings = {
+              -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
+        save_on_toggle = false,
+        -- saves the harpoon file upon every change. disabling is unrecommended.
+        save_on_change = true,
+
+        -- filetypes that you want to prevent from adding to the harpoon list menu.
+        excluded_filetypes = { "harpoon" },
+
+        -- set marks specific to each git branch inside git repository
+        mark_branch = true,
+
+        -- enable tabline with harpoon marks
+        tabline = false,
+        tabline_prefix = "   ",
+        tabline_suffix = "   ",
+      }
+
+    }
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -236,6 +257,7 @@ require('telescope').setup {
     },
   },
 }
+require("telescope").load_extension('harpoon')
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -258,6 +280,10 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H]arpoon [A]dd' })
+vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]arpoon [N]ext' })
+vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]rev' })
+vim.keymap.set('n', '<leader>hm', '<CMD>Telescope harpoon marks<CR>', { desc = '[H]arpoon [M]marks' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
