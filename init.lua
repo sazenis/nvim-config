@@ -17,6 +17,16 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons'
+  },
+  {
     "ThePrimeagen/harpoon",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -52,9 +62,9 @@ require('lazy').setup({
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
   },
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
-  'tpope/vim-sleuth',
+    'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
+    'tpope/vim-sleuth',
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -95,7 +105,7 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
@@ -245,6 +255,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+require('bufferline').setup{}
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -280,10 +292,22 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+
+-- Harpoon config
 vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H]arpoon [A]dd' })
 vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]arpoon [N]ext' })
 vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]rev' })
 vim.keymap.set('n', '<leader>hm', '<CMD>Telescope harpoon marks<CR>', { desc = '[H]arpoon [M]marks' })
+vim.keymap.set('n', '<leader>hq', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon [Q]uick Menu' })
+vim.keymap.set('n', '<silent><leader>2', function() require('harpoon.ui').nav_file(1) end)
+vim.keymap.set('n', '<silent><leader>2', function() require('harpoon.ui').nav_file(2) end)
+vim.keymap.set('n', '<silent><leader>3', function() require('harpoon.ui').nav_file(3) end)
+vim.keymap.set('n', '<silent><leader>4', function() require('harpoon.ui').nav_file(4) end)
+vim.keymap.set('n', '<silent><leader>5', function() require('harpoon.ui').nav_file(5) end)
+vim.keymap.set('n', '<silent><leader>6', function() require('harpoon.ui').nav_file(6) end)
+vim.keymap.set('n', '<silent><leader>7', function() require('harpoon.ui').nav_file(7) end)
+vim.keymap.set('n', '<silent><leader>8', function() require('harpoon.ui').nav_file(8) end)
+vim.keymap.set('n', '<silent><leader>9', function() require('harpoon.ui').nav_file(9) end)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -410,7 +434,7 @@ require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
+  ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
