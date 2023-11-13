@@ -260,8 +260,8 @@ vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H
 vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]arpoon [N]ext' })
 vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]rev' })
 vim.keymap.set('n', '<leader>hm', '<CMD>Telescope harpoon marks<CR>', { desc = '[H]arpoon [M]marks' })
-vim.keymap.set('n', '<leader>hq', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon [Q]uick Menu' })
-vim.keymap.set('n', '<leader>1', function() require('harpoon.ui').nav_file(1) end)
+vim.keymap.set('n', '<leader>hh', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon Quick Menu' })
+vim.keymap.set('n', '<leader>1', function() require('harpoon.ui').nav_file(1) end, { silent = true})
 vim.keymap.set('n', '<leader>2', function() require('harpoon.ui').nav_file(2) end)
 vim.keymap.set('n', '<leader>3', function() require('harpoon.ui').nav_file(3) end)
 vim.keymap.set('n', '<leader>4', function() require('harpoon.ui').nav_file(4) end)
@@ -270,6 +270,18 @@ vim.keymap.set('n', '<leader>6', function() require('harpoon.ui').nav_file(6) en
 vim.keymap.set('n', '<leader>7', function() require('harpoon.ui').nav_file(7) end)
 vim.keymap.set('n', '<leader>8', function() require('harpoon.ui').nav_file(8) end)
 vim.keymap.set('n', '<leader>9', function() require('harpoon.ui').nav_file(9) end)
+-- Hiding in which key window 
+require('which-key').register {
+  ['<leader>1'] = 'which_key_ignore',
+  ['<leader>2'] = 'which_key_ignore',
+  ['<leader>3'] = 'which_key_ignore',
+  ['<leader>4'] = 'which_key_ignore',
+  ['<leader>5'] = 'which_key_ignore',
+  ['<leader>6'] = 'which_key_ignore',
+  ['<leader>7'] = 'which_key_ignore',
+  ['<leader>8'] = 'which_key_ignore',
+  ['<leader>9'] = 'which_key_ignore'
+}
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
