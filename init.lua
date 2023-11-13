@@ -16,52 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
-  },
-  {
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons'
-  },
-  {
-    "ThePrimeagen/harpoon",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      global_settings = {
-              -- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
-        save_on_toggle = false,
-        -- saves the harpoon file upon every change. disabling is unrecommended.
-        save_on_change = true,
-
-        -- filetypes that you want to prevent from adding to the harpoon list menu.
-        excluded_filetypes = { "harpoon" },
-
-        -- set marks specific to each git branch inside git repository
-        mark_branch = true,
-
-        -- enable tabline with harpoon marks
-        tabline = false,
-        tabline_prefix = "   ",
-        tabline_suffix = "   ",
-      }
-
-    }
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    },
-  },
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     'tpope/vim-sleuth',
@@ -81,7 +35,6 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -153,14 +106,10 @@ require('lazy').setup({
   },
 
   {
-    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
     main = 'ibl',
     opts = {},
   },
-  -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-telescope/telescope.nvim',
@@ -202,7 +151,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- Set highlight on search
@@ -235,7 +184,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 vim.o.termguicolors = true
 
--- [[ Basic Keymaps ]]
+-- [[ basic keymaps ][]]
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<leader>f', '<Cmd>Neotree toggle<CR>')
@@ -269,6 +218,7 @@ require('telescope').setup {
     },
   },
 }
+
 require("telescope").load_extension('harpoon')
 
 -- Enable telescope fzf native, if installed
@@ -299,15 +249,15 @@ vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]a
 vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]rev' })
 vim.keymap.set('n', '<leader>hm', '<CMD>Telescope harpoon marks<CR>', { desc = '[H]arpoon [M]marks' })
 vim.keymap.set('n', '<leader>hq', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon [Q]uick Menu' })
-vim.keymap.set('n', '<silent><leader>2', function() require('harpoon.ui').nav_file(1) end)
-vim.keymap.set('n', '<silent><leader>2', function() require('harpoon.ui').nav_file(2) end)
-vim.keymap.set('n', '<silent><leader>3', function() require('harpoon.ui').nav_file(3) end)
-vim.keymap.set('n', '<silent><leader>4', function() require('harpoon.ui').nav_file(4) end)
-vim.keymap.set('n', '<silent><leader>5', function() require('harpoon.ui').nav_file(5) end)
-vim.keymap.set('n', '<silent><leader>6', function() require('harpoon.ui').nav_file(6) end)
-vim.keymap.set('n', '<silent><leader>7', function() require('harpoon.ui').nav_file(7) end)
-vim.keymap.set('n', '<silent><leader>8', function() require('harpoon.ui').nav_file(8) end)
-vim.keymap.set('n', '<silent><leader>9', function() require('harpoon.ui').nav_file(9) end)
+vim.keymap.set('n', '<leader>1', function() require('harpoon.ui').nav_file(1) end)
+vim.keymap.set('n', '<leader>2', function() require('harpoon.ui').nav_file(2) end)
+vim.keymap.set('n', '<leader>3', function() require('harpoon.ui').nav_file(3) end)
+vim.keymap.set('n', '<leader>4', function() require('harpoon.ui').nav_file(4) end)
+vim.keymap.set('n', '<leader>5', function() require('harpoon.ui').nav_file(5) end)
+vim.keymap.set('n', '<leader>6', function() require('harpoon.ui').nav_file(6) end)
+vim.keymap.set('n', '<leader>7', function() require('harpoon.ui').nav_file(7) end)
+vim.keymap.set('n', '<leader>8', function() require('harpoon.ui').nav_file(8) end)
+vim.keymap.set('n', '<leader>9', function() require('harpoon.ui').nav_file(9) end)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
