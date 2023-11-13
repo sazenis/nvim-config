@@ -224,15 +224,27 @@ require("telescope").load_extension('harpoon')
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+-- document existing key chains
+require('which-key').register {
+  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+  ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
+  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+}
+
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
+
+vim.keymap.set('n', '<leader>b', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
-  })
+ })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
@@ -258,6 +270,22 @@ vim.keymap.set('n', '<leader>6', function() require('harpoon.ui').nav_file(6) en
 vim.keymap.set('n', '<leader>7', function() require('harpoon.ui').nav_file(7) end)
 vim.keymap.set('n', '<leader>8', function() require('harpoon.ui').nav_file(8) end)
 vim.keymap.set('n', '<leader>9', function() require('harpoon.ui').nav_file(9) end)
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- Mapping CTRL + Arrow keys for window navigation
+vim.api.nvim_set_keymap('n', '<C-Up>', '<C-w>k', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-Down>', '<C-w>j', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-Left>', '<C-w>h', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', {noremap = true})
+
+
+
+
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -328,19 +356,10 @@ vim.defer_fn(function()
   }
 end, 0)
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
@@ -379,16 +398,6 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-}
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
