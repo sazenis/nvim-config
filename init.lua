@@ -16,9 +16,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-    'tpope/vim-fugitive',
-    'tpope/vim-rhubarb',
-    'tpope/vim-sleuth',
+  'eandrju/cellular-automaton.nvim',
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+  'tpope/vim-sleuth',
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -295,7 +296,8 @@ vim.api.nvim_set_keymap('n', '<C-Down>', '<C-w>j', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-Left>', '<C-w>h', {noremap = true})
 vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', {noremap = true})
 
-
+-- Meme mappings 
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 
 
