@@ -117,9 +117,6 @@ require('lazy').setup({
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- NOTE: If you are having trouble with this installation,
@@ -140,18 +137,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins' },
 }, {})
 
@@ -206,6 +191,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 require('bufferline').setup{}
+require('keymaps');
+
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -237,41 +224,9 @@ require('which-key').register {
 }
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+-- vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+-- vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 
-vim.keymap.set('n', '<leader>b', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
- })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-
--- Harpoon config
-vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H]arpoon [A]dd' })
-vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]arpoon [N]ext' })
-vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon [P]rev' })
-vim.keymap.set('n', '<leader>hm', '<CMD>Telescope harpoon marks<CR>', { desc = '[H]arpoon [M]marks' })
-vim.keymap.set('n', '<leader>hh', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon Quick Menu' })
-vim.keymap.set('n', '<leader>1', function() require('harpoon.ui').nav_file(1) end, { silent = true})
-vim.keymap.set('n', '<leader>2', function() require('harpoon.ui').nav_file(2) end)
-vim.keymap.set('n', '<leader>3', function() require('harpoon.ui').nav_file(3) end)
-vim.keymap.set('n', '<leader>4', function() require('harpoon.ui').nav_file(4) end)
-vim.keymap.set('n', '<leader>5', function() require('harpoon.ui').nav_file(5) end)
-vim.keymap.set('n', '<leader>6', function() require('harpoon.ui').nav_file(6) end)
-vim.keymap.set('n', '<leader>7', function() require('harpoon.ui').nav_file(7) end)
-vim.keymap.set('n', '<leader>8', function() require('harpoon.ui').nav_file(8) end)
-vim.keymap.set('n', '<leader>9', function() require('harpoon.ui').nav_file(9) end)
--- Hiding in which key window 
 require('which-key').register {
   ['<leader>1'] = 'which_key_ignore',
   ['<leader>2'] = 'which_key_ignore',
@@ -283,23 +238,6 @@ require('which-key').register {
   ['<leader>8'] = 'which_key_ignore',
   ['<leader>9'] = 'which_key_ignore'
 }
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- Mapping CTRL + Arrow keys for window navigation
-vim.api.nvim_set_keymap('n', '<C-Up>', '<C-w>k', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-Down>', '<C-w>j', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-Left>', '<C-w>h', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', {noremap = true})
-
--- Meme mappings 
-vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
-
-
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
