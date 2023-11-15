@@ -49,15 +49,15 @@ mapNLeader('hh', harpoonUi.toggle_quick_menu, '[H]arpoon Quick Menu')
 --   mapNLeader(i, mapNav(i), 'Harpoon nav file: '..i)
 -- end
 
-mapNLeader('1', function() require('harpoon.ui').nav_file(1) end)
-mapNLeader('2', function() require('harpoon.ui').nav_file(2) end)
-mapNLeader('3', function() require('harpoon.ui').nav_file(3) end)
-mapNLeader('4', function() require('harpoon.ui').nav_file(4) end)
-mapNLeader('5', function() require('harpoon.ui').nav_file(5) end)
-mapNLeader('6', function() require('harpoon.ui').nav_file(6) end)
-mapNLeader('7', function() require('harpoon.ui').nav_file(7) end)
-mapNLeader('8', function() require('harpoon.ui').nav_file(8) end)
-mapNLeader('9', function() require('harpoon.ui').nav_file(9) end)
+mapNKey('<M-q>', function() require('harpoon.ui').nav_file(1) end)
+mapNKey('<M-w>', function() require('harpoon.ui').nav_file(2) end)
+mapNKey('<M-e>', function() require('harpoon.ui').nav_file(3) end)
+mapNKey('<M-r>', function() require('harpoon.ui').nav_file(4) end)
+mapNKey('<M-t>', function() require('harpoon.ui').nav_file(5) end)
+mapNKey('<M-y>', function() require('harpoon.ui').nav_file(6) end)
+mapNKey('<M-u>', function() require('harpoon.ui').nav_file(7) end)
+mapNKey('<M-i>', function() require('harpoon.ui').nav_file(8) end)
+mapNKey('<M-o>', function() require('harpoon.ui').nav_file(9) end)
 
 -- Diagnostic keymaps
 local vDiag = vim.diagnostic

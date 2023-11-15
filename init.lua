@@ -268,8 +268,8 @@ vim.defer_fn(function()
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ['aa'] = '@parameter.outer',
-          ['ia'] = '@parameter.inner',
           ['af'] = '@function.outer',
+          ['ia'] = '@parameter.inner',
           ['if'] = '@function.inner',
           ['ac'] = '@class.outer',
           ['ic'] = '@class.inner',
