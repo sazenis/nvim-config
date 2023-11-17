@@ -75,3 +75,9 @@ vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', {noremap = true})
 
 -- Meme mappings 
 mapNLeader("fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+
+-- Quickfix list keymaps
+mapNLeader("qo", "<cmf>copen", '[Q]uickfix [O]pen')
+mapNLeader("qc", "<cmf>ccl", '[Q]uickfix [C]lose')
+mapNLeader("qn", "<cmf>cn", '[Q]uickfix [N]ext')
+mapNLeader("qp", "<cmf>cp", '[Q]uickfix [P]rev')
