@@ -96,18 +96,6 @@ require('lazy').setup({
   --   priority = 1000,
   -- },
   {
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'rose-pine',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
-  {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {},
