@@ -84,28 +84,29 @@ require('lazy').setup({
       end,
     },
   },
-
   {
-    'navarasu/onedark.nvim',
-    priority = 1000,
+    'rose-pine/neovim',
+    name = 'rose-pine',
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'rose-pine'
     end,
   },
-
+  -- {
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  -- },
   {
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'rose-pine',
         component_separators = '|',
         section_separators = '',
       },
     },
   },
-
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
