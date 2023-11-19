@@ -81,3 +81,6 @@ mapNLeader("qo", "<cmd>copen<CR>", '[Q]uickfix [O]pen')
 mapNLeader("qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
 mapNLeader("qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
 mapNLeader("qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
+
+
+-- Session 

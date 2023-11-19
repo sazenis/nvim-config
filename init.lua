@@ -16,6 +16,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  {
+  "folke/persistence.nvim",
+  event = "BufReadPre"
+  },
   'eandrju/cellular-automaton.nvim',
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
@@ -128,6 +132,10 @@ require('lazy').setup({
 
   { import = 'custom.plugins' },
 }, {})
+
+-- Set global status line
+vim.o.laststatus = 3
+vim.o.cmdheight = 0
 
 -- Set highlight on search
 vim.o.hlsearch = false
