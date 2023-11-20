@@ -91,19 +91,15 @@ require('lazy').setup({
   {
     'rose-pine/neovim',
     name = 'rose-pine',
-    config = function()
-      vim.cmd.colorscheme 'rose-pine'
-    end,
+    priority = 1000,
+    opts = {
+      disable_italics = true,
+    }
   },
   -- {
   --   'navarasu/onedark.nvim',
   --   priority = 1000,
   -- },
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    opts = {},
-  },
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-telescope/telescope.nvim',
@@ -133,6 +129,7 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
+vim.cmd.colorscheme 'rose-pine'
 -- Set global status line
 vim.o.laststatus = 3
 vim.o.cmdheight = 0

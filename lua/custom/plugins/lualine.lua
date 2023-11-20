@@ -11,10 +11,10 @@ return {
         lualine_a = {
           { 'mode', right_padding = 2 },
         },
-        lualine_b = { 'filename', 'branch' },
+        lualine_b = { {'filename', path = 1 } },
         lualine_c = {},
         lualine_x = {},
-        lualine_y = { 'filetype', 'progress' },
+        lualine_y = { 'branch', 'progress'},
         lualine_z = {
           { 'location', left_padding = 2 },
         },
