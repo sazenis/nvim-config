@@ -1,17 +1,16 @@
-
 local mapKey = function(mode, key, func, desc, opts)
-    vim.keymap.set(mode, key, func, vim.tbl_extend("force", {desc = desc}, opts or {}))
+  vim.keymap.set(mode, key, func, vim.tbl_extend("force", { desc = desc }, opts or {}))
 end
 
 local mapNKey = function(key, func, desc, opts)
-    vim.keymap.set('n', key, func, vim.tbl_extend("force", {desc = desc}, opts or {}))
+  vim.keymap.set('n', key, func, vim.tbl_extend("force", { desc = desc }, opts or {}))
 end
 
-local mapLeader = function (mode, key, func, desc, opts)
-  mapKey(mode, '<leader>'..key, func, desc, opts)
+local mapLeader = function(mode, key, func, desc, opts)
+  mapKey(mode, '<leader>' .. key, func, desc, opts)
 end
 
-local mapNLeader = function (key, func, desc, opts)
+local mapNLeader = function(key, func, desc, opts)
   mapLeader('n', key, func, desc, opts)
 end
 
@@ -21,7 +20,7 @@ mapNLeader('?', teleBuiltin.oldfiles, '[?] Find recently opened files')
 mapNLeader('<space>', teleBuiltin.buffers, '[ ] Find existing buffers')
 
 vim.keymap.set('n', '<leader>b', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{winblend = 10, previewer = false})
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 mapNLeader('gf', teleBuiltin.git_files, 'Search [G]it [F]iles')
@@ -68,12 +67,12 @@ mapNLeader('e', vDiag.open_float, 'Open floating diagnostic message')
 mapNLeader('q', vDiag.setloclist, 'Open diagnostics list')
 
 -- Mapping CTRL + Arrow keys for window navigation
-vim.api.nvim_set_keymap('n', '<C-Up>', '<C-w>k', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-Down>', '<C-w>j', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-Left>', '<C-w>h', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', {noremap = true})
+vim.api.nvim_set_keymap('n', '<C-Up>', '<C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-Down>', '<C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-Left>', '<C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', { noremap = true })
 
--- Meme mappings 
+-- Meme mappings
 mapNLeader("fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 -- Quickfix list keymaps
@@ -82,5 +81,4 @@ mapNLeader("qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
 mapNLeader("qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
 mapNLeader("qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
 
--- Session 
-
+-- Session
