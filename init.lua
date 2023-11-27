@@ -130,6 +130,12 @@ require('lazy').setup({
 }, {})
 
 vim.cmd.colorscheme 'rose-pine'
+
+-- NEOVIDE Configure
+vim.o.guifont = "JetBrainsMono Nerd Font Mono:h11"
+vim.g.neovide_scroll_animation_length = 0.2
+
+
 -- Set global status line
 vim.o.laststatus = 3
 vim.o.cmdheight = 0
