@@ -24,6 +24,7 @@ vim.keymap.set('n', '<leader>b', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 mapNLeader('gf', teleBuiltin.git_files, 'Search [G]it [F]iles')
+mapNLeader('gs', teleBuiltin.git_status, 'Search [G]it [S]status')
 mapNLeader('sf', teleBuiltin.find_files, '[S]earch [F]iles')
 mapNLeader('sh', teleBuiltin.help_tags, '[S]earch [H]elp')
 mapNLeader('sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
@@ -43,7 +44,7 @@ mapNLeader('ha', harpoonMark.add_file, '[H]arpoon [A]dd')
 mapNLeader('hn', harpoonUi.nav_next, '[H]arpoon [N]ext')
 mapNLeader('hp', harpoonUi.nav_prev, '[H]arpoon [P]rev')
 mapNLeader('hm', '<CMD>Telescope harpoon marks<CR>', '[H]arpoon [M]marks')
-mapNLeader('hh', harpoonUi.toggle_quick_menu, '[H]arpoon Quick Menu')
+mapNLeader('sh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
 
 -- for i = 1, 9 do
 --   mapNLeader(i, mapNav(i), 'Harpoon nav file: '..i)
