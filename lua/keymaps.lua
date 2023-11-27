@@ -84,9 +84,3 @@ mapNLeader("qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
 
 -- Session 
 
-
-
-
--- Random
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
