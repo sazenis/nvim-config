@@ -30,6 +30,7 @@ mapNLeader('sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
 mapNLeader('sg', teleBuiltin.live_grep, '[S]earch by [G]rep')
 mapNLeader('sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
 mapNLeader('sr', teleBuiltin.resume, '[S]earch [R]esume')
+mapNLeader('sm', teleBuiltin.marks, '[S]earch [M]arks')
 
 -- Harpoon config
 local harpoonUi = require('harpoon.ui')
