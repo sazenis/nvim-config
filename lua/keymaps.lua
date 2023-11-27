@@ -23,8 +23,9 @@ vim.keymap.set('n', '<leader>b', function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-mapNLeader('gf', teleBuiltin.git_files, 'Search [G]it [F]iles')
-mapNLeader('gs', teleBuiltin.git_status, 'Search [G]it [S]status')
+mapNLeader('sgf', teleBuiltin.git_files, 'Search [G]it [F]iles')
+mapNLeader('sgs', teleBuiltin.git_status, 'Search [G]it [S]status')
+
 mapNLeader('sf', teleBuiltin.find_files, '[S]earch [F]iles')
 mapNLeader('sh', teleBuiltin.help_tags, '[S]earch [H]elp')
 mapNLeader('sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
@@ -33,22 +34,17 @@ mapNLeader('sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
 mapNLeader('sr', teleBuiltin.resume, '[S]earch [R]esume')
 mapNLeader('sm', teleBuiltin.marks, '[S]earch [M]arks')
 
+mapNLeader('sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
+
 -- Harpoon config
 local harpoonUi = require('harpoon.ui')
 local harpoonMark = require('harpoon.mark')
--- function mapNav(fileIdx)
---   harpoonUi.nav_file(fileIdx)
--- end
 
 mapNLeader('ha', harpoonMark.add_file, '[H]arpoon [A]dd')
 mapNLeader('hn', harpoonUi.nav_next, '[H]arpoon [N]ext')
 mapNLeader('hp', harpoonUi.nav_prev, '[H]arpoon [P]rev')
 mapNLeader('hm', '<CMD>Telescope harpoon marks<CR>', '[H]arpoon [M]marks')
 mapNLeader('sh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
-
--- for i = 1, 9 do
---   mapNLeader(i, mapNav(i), 'Harpoon nav file: '..i)
--- end
 
 mapNKey('<M-q>', function() require('harpoon.ui').nav_file(1) end)
 mapNKey('<M-w>', function() require('harpoon.ui').nav_file(2) end)
@@ -67,6 +63,8 @@ mapNKey('[d', vDiag.goto_prev, 'Go to previous diagnostic message')
 mapNKey(']d', vDiag.goto_next, 'Go to next diagnostic message')
 mapNLeader('e', vDiag.open_float, 'Open floating diagnostic message')
 mapNLeader('q', vDiag.setloclist, 'Open diagnostics list')
+
+-- Code keys
 
 -- Mapping CTRL + Arrow keys for window navigation
 vim.api.nvim_set_keymap('n', '<C-Up>', '<C-w>k', { noremap = true })
