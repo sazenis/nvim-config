@@ -35,6 +35,7 @@ mapNLeader('sr', teleBuiltin.resume, '[S]earch [R]esume')
 mapNLeader('sm', teleBuiltin.marks, '[S]earch [M]arks')
 
 mapNLeader('sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
+mapLeader({'n', 'x'},'cr', function() require('telescope').extensions.refactoring.refactors() end, '[C]ode [R]efactor') 
 
 -- Harpoon config
 local harpoonUi = require('harpoon.ui')
@@ -80,5 +81,8 @@ mapNLeader("qo", "<cmd>copen<CR>", '[Q]uickfix [O]pen')
 mapNLeader("qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
 mapNLeader("qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
 mapNLeader("qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
+
+-- Refactoring
+
 
 -- Session
