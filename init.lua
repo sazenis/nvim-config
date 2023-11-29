@@ -22,8 +22,6 @@ require('lazy').setup({
   },
   'eandrju/cellular-automaton.nvim',
   'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
-  'tpope/vim-sleuth',
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
