@@ -45,7 +45,7 @@ mapNLeader('ha', harpoonMark.add_file, '[H]arpoon [A]dd')
 mapNLeader('hn', harpoonUi.nav_next, '[H]arpoon [N]ext')
 mapNLeader('hp', harpoonUi.nav_prev, '[H]arpoon [P]rev')
 mapNLeader('hm', '<CMD>Telescope harpoon marks<CR>', '[H]arpoon [M]marks')
-mapNLeader('sh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
+mapNLeader('hh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
 
 mapNKey('<M-q>', function() require('harpoon.ui').nav_file(1) end)
 mapNKey('<M-w>', function() require('harpoon.ui').nav_file(2) end)
