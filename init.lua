@@ -18,6 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   'eandrju/cellular-automaton.nvim',
   'tpope/vim-fugitive',
+  'tpope/vim-sleuth',
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -73,7 +74,7 @@ require('lazy').setup({
 vim.cmd.colorscheme 'rose-pine'
 
 -- NEOVIDE Configure
-vim.o.guifont = "JetBrainsMono Nerd Font:h8"
+vim.o.guifont = "JetBrainsMono Nerd Font:h9"
 -- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h11"
 vim.g.neovide_scroll_animation_length = 0.2
 

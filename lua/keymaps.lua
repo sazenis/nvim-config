@@ -32,7 +32,7 @@ mapNLeader('sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
 mapNLeader('sg', teleBuiltin.live_grep, '[S]earch by [G]rep')
 mapNLeader('sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
 mapNLeader('sr', teleBuiltin.resume, '[S]earch [R]esume')
-mapNLeader('sm', teleBuiltin.marks, '[S]earch [M]arks')
+mapNLeader('s', teleBuiltin.marks, '[S]earch [M]arks')
 
 mapNLeader('sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
 mapLeader({'n', 'x'},'cr', function() require('telescope').extensions.refactoring.refactors() end, '[C]ode [R]efactor') 
