@@ -16,30 +16,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  {
-  "folke/persistence.nvim",
-  event = "BufReadPre"
-  },
   'eandrju/cellular-automaton.nvim',
   'tpope/vim-fugitive',
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
+      { 'j-hui/fidget.nvim', opts = {} },
       'folke/neodev.nvim',
     },
   },
   {
-    -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
       'L3MON4D3/LuaSnip',
@@ -50,43 +38,6 @@ require('lazy').setup({
   },
   { 'folke/which-key.nvim', opts = {} },
   {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-      on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-
-        -- don't override the built-in and fugitive keymaps
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
-      end,
-    },
-  },
-  {
     'rose-pine/neovim',
     name = 'rose-pine',
     priority = 1000,
@@ -94,10 +45,6 @@ require('lazy').setup({
       disable_italics = true,
     }
   },
-  -- {
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  -- },
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'nvim-telescope/telescope.nvim',
@@ -106,8 +53,6 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
@@ -116,14 +61,12 @@ require('lazy').setup({
     },
   },
   {
-    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
   },
-
   { import = 'custom.plugins' },
 }, {})
 
