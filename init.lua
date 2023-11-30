@@ -20,11 +20,19 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
   {
+    'j-hui/fidget.nvim',
+    opts = {
+      notification = {
+        override_vim_notify = true
+      }
+    }
+  },
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+
       'folke/neodev.nvim',
     },
   },
@@ -136,6 +144,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 require('bufferline').setup{}
 require('keymaps');
+require('user_commands');
 
 
 -- [[ Configure Telescope ]]
