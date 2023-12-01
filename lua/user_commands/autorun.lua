@@ -15,7 +15,10 @@ local function create_scratch_buffer()
 end
 
 vim.api.nvim_create_user_command('Autorun', function (args)
-    local filePattern, executionCmd = unpack(vim.split(args.args, " ", { plain = true }))
+    local args_tbl = vim.split(args.args, " ", { plain = true })
+    local filePattern = args_tbl[1]
+    table.remove(args_tbl, 1)
+    local executionCmd = table.concat(args_tbl, " ")
     create_scratch_buffer()
     vim.cmd('wincmd p')
     auto_group = vim.api.nvim_create_augroup('AutoRunGroup', { clear = true })
