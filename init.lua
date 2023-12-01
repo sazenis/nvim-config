@@ -144,7 +144,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 require('bufferline').setup{}
 require('keymaps');
-require('user_commands');
+require('user_commands')
 
 
 -- [[ Configure Telescope ]]
