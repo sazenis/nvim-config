@@ -3,34 +3,28 @@ local output_buf
 
 local function create_scratch_buffer()
     vim.cmd('rightbelow vnew')
+    local total_width = vim.api.nvim_get_option('columns')
+    local output_width = math.floor(total_width * 0.3)
+    vim.cmd('vertical resize ' .. output_width)
     output_buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_win_set_buf(0, output_buf)
     vim.api.nvim_buf_set_option(output_buf, 'buftype', 'nofile')
     vim.api.nvim_buf_set_option(output_buf, 'bufhidden', 'wipe')
     vim.api.nvim_buf_set_option(output_buf, 'swapfile', false)
     vim.api.nvim_win_set_option(0, 'wrap', false)
-    vim.cmd('vertical resize 80') 
 end
 
 vim.api.nvim_create_user_command('Autorun', function (args)
-    local executor = args.args ~= "" and args.args or "bun"
-    local main_buf = vim.api.nvim_get_current_buf()
-
+    local filePattern, executionCmd = unpack(vim.split(args.args, " ", { plain = true }))
     create_scratch_buffer()
-
     vim.cmd('wincmd p')
-
     auto_group = vim.api.nvim_create_augroup('AutoRunGroup', { clear = true })
-
     vim.api.nvim_create_autocmd('BufWritePost', {
         group = auto_group,
-        buffer = main_buf,
+        pattern = filePattern,
         callback = function()
             vim.api.nvim_buf_set_lines(output_buf, 0, -1, false, {})
-
-            local main_file = vim.api.nvim_buf_get_name(main_buf)
-            local cmd = executor .. " " .. main_file
-
+            local cmd = executionCmd
             local function on_event(job_id, data, event)
                 if event == "stdout" or event == "stderr" then
                     for _, line in ipairs(data) do
@@ -40,7 +34,6 @@ vim.api.nvim_create_user_command('Autorun', function (args)
                     end
                 end
             end
-
             vim.fn.jobstart(cmd, {
                 on_stdout = on_event,
                 on_stderr = on_event,
@@ -49,7 +42,7 @@ vim.api.nvim_create_user_command('Autorun', function (args)
             })
         end,
     })
-end, { nargs = "?" })
+end, { nargs = "*" })
 
 vim.api.nvim_create_user_command('StopAuto', function ()
     if auto_group then
@@ -58,6 +51,9 @@ vim.api.nvim_create_user_command('StopAuto', function ()
         if output_buf and vim.api.nvim_buf_is_valid(output_buf) then
             vim.api.nvim_buf_delete(output_buf, { force = true })
         end
-        vim.notify("Autorun stopped")
     end
+end, {})
+
+vim.api.nvim_create_user_command('BunAutoRun', function ()
+    vim.api.nvim_command('Autorun *.ts bun run index.ts')
 end, {})
