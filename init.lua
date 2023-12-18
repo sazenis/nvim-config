@@ -89,7 +89,7 @@ vim.g.neovide_scroll_animation_length = 0.2
 
 -- Set global status line
 vim.o.laststatus = 3
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 
 -- Set highlight on search
 vim.o.hlsearch = false
