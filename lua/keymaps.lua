@@ -82,7 +82,6 @@ mapNLeader("qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
 mapNLeader("qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
 mapNLeader("qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
 
+mapNLeader("go", "<cmd>DiffviewOpen<CR>", '[G]it DiffView [O]pen')
+mapNLeader("gc", "<cmd>DiffviewClose<CR>", '[G]it DiffView [C]lose')
 -- Refactoring
-
-
--- Session
