@@ -1,87 +1,91 @@
-local mapKey = function(mode, key, func, desc, opts)
-  vim.keymap.set(mode, key, func, vim.tbl_extend("force", { desc = desc }, opts or {}))
+local function nmap(key, action, desc, opts)
+    local options = { noremap = true, silent = true }
+    if desc then
+        options.desc = desc
+    end
+    if opts then
+        options = vim.tbl_extend('force', options, opts)
+    end
+    vim.keymap.set('n', key, action, options)
 end
 
-local mapNKey = function(key, func, desc, opts)
-  vim.keymap.set('n', key, func, vim.tbl_extend("force", { desc = desc }, opts or {}))
-end
+local which_register = require("which-key").register;
 
-local mapLeader = function(mode, key, func, desc, opts)
-  mapKey(mode, '<leader>' .. key, func, desc, opts)
-end
-
-local mapNLeader = function(key, func, desc, opts)
-  mapLeader('n', key, func, desc, opts)
-end
-
+--- Telescope
 local teleBuiltin = require('telescope.builtin')
 
-mapNLeader('?', teleBuiltin.oldfiles, '[?] Find recently opened files')
-mapNLeader('<space>', teleBuiltin.buffers, '[ ] Find existing buffers')
+nmap('<leader>?', teleBuiltin.oldfiles, '[?] Find recently opened files')
+nmap('<leader><space>', teleBuiltin.buffers, '[ ] Find existing buffers')
+nmap('<leader>b', teleBuiltin.current_buffer_fuzzy_find , '[/] Fuzzily search in current buffer')
+nmap('<leader>sf', teleBuiltin.find_files, '[S]earch [F]iles')
+nmap('<leader>sh', teleBuiltin.help_tags, '[S]earch [H]elp')
+nmap('<leader>sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
+nmap('<leader>sg', teleBuiltin.live_grep, '[S]earch by [G]rep')
+nmap('<leader>sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
+nmap('<leader>sr', teleBuiltin.resume, '[S]earch [R]esume')
+nmap('<leader>s', teleBuiltin.marks, '[S]earch [M]arks')
 
-vim.keymap.set('n', '<leader>b', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { winblend = 10, previewer = false })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
-mapNLeader('sgf', teleBuiltin.git_files, 'Search [G]it [F]iles')
-mapNLeader('sgs', teleBuiltin.git_status, 'Search [G]it [S]status')
-
-mapNLeader('sf', teleBuiltin.find_files, '[S]earch [F]iles')
-mapNLeader('sh', teleBuiltin.help_tags, '[S]earch [H]elp')
-mapNLeader('sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
-mapNLeader('sg', teleBuiltin.live_grep, '[S]earch by [G]rep')
-mapNLeader('sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
-mapNLeader('sr', teleBuiltin.resume, '[S]earch [R]esume')
-mapNLeader('s', teleBuiltin.marks, '[S]earch [M]arks')
-
-mapNLeader('sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
-mapLeader({'n', 'x'},'cr', function() require('telescope').extensions.refactoring.refactors() end, '[C]ode [R]efactor') 
+nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
+nmap('<leader>cr', function() require('telescope').extensions.refactoring.refactors() end, '[C]ode [R]efactor')
 
 -- Harpoon config
 local harpoonUi = require('harpoon.ui')
 local harpoonMark = require('harpoon.mark')
 
-mapNLeader('ha', harpoonMark.add_file, '[H]arpoon [A]dd')
-mapNLeader('hn', harpoonUi.nav_next, '[H]arpoon [N]ext')
-mapNLeader('hp', harpoonUi.nav_prev, '[H]arpoon [P]rev')
-mapNLeader('hm', '<CMD>Telescope harpoon marks<CR>', '[H]arpoon [M]marks')
-mapNLeader('hh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
+nmap('<leader>ha', harpoonMark.add_file, '[H]arpoon [A]dd')
+nmap('<leader>hn', harpoonUi.nav_next, '[H]arpoon [N]ext')
+nmap('<leader>hp', harpoonUi.nav_prev, '[H]arpoon [P]rev')
+nmap('<leader>hm', '<CMD>Telescope harpoon marks<CR>', '[H]arpoon [M]marks')
+nmap('<leader>hh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
 
-mapNKey('<M-q>', function() require('harpoon.ui').nav_file(1) end)
-mapNKey('<M-w>', function() require('harpoon.ui').nav_file(2) end)
-mapNKey('<M-e>', function() require('harpoon.ui').nav_file(3) end)
-mapNKey('<M-r>', function() require('harpoon.ui').nav_file(4) end)
-mapNKey('<M-t>', function() require('harpoon.ui').nav_file(5) end)
-mapNKey('<M-y>', function() require('harpoon.ui').nav_file(6) end)
-mapNKey('<M-u>', function() require('harpoon.ui').nav_file(7) end)
-mapNKey('<M-i>', function() require('harpoon.ui').nav_file(8) end)
-mapNKey('<M-o>', function() require('harpoon.ui').nav_file(9) end)
+nmap('<M-q>', function() require('harpoon.ui').nav_file(1) end)
+nmap('<M-w>', function() require('harpoon.ui').nav_file(2) end)
+nmap('<M-e>', function() require('harpoon.ui').nav_file(3) end)
+nmap('<M-r>', function() require('harpoon.ui').nav_file(4) end)
+nmap('<M-t>', function() require('harpoon.ui').nav_file(5) end)
+nmap('<M-y>', function() require('harpoon.ui').nav_file(6) end)
+nmap('<M-u>', function() require('harpoon.ui').nav_file(7) end)
+nmap('<M-i>', function() require('harpoon.ui').nav_file(8) end)
+nmap('<M-o>', function() require('harpoon.ui').nav_file(9) end)
 
 -- Diagnostic keymaps
 local vDiag = vim.diagnostic
 
-mapNKey('[d', vDiag.goto_prev, 'Go to previous diagnostic message')
-mapNKey(']d', vDiag.goto_next, 'Go to next diagnostic message')
-mapNLeader('e', vDiag.open_float, 'Open floating diagnostic message')
-mapNLeader('q', vDiag.setloclist, 'Open diagnostics list')
+nmap('[d', vDiag.goto_prev, 'Go to previous diagnostic message')
+nmap(']d', vDiag.goto_next, 'Go to next diagnostic message')
+nmap('<leader>e', vDiag.open_float, 'Open floating diagnostic message')
+nmap('<leader>q', vDiag.setloclist, 'Open diagnostics list')
 
--- Code keys
+-- Git keys
+nmap('<leader>gf', teleBuiltin.git_files, '[G]it [F]iles')
+nmap('<leader>gs', teleBuiltin.git_status, '[G]it [S]status')
+nmap('<leader>gc', '<cmd>DiffviewClose<CR>', '[G]it DiffView [C]lose')
+nmap('<leader>go', '<cmd>DiffviewOpen<CR>', '[G]it DiffView [O]pen')
+nmap('<leader>gb', teleBuiltin.git_branches, '[G]it [B]branches')
 
 -- Mapping CTRL + Arrow keys for window navigation
-vim.api.nvim_set_keymap('n', '<C-Up>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-Down>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-Left>', '<C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-Right>', '<C-w>l', { noremap = true })
+nmap('<C-Up>', '<C-w>k', { noremap = true })
+nmap('<C-Down>', '<C-w>j', { noremap = true })
+nmap('<C-Left>', '<C-w>h', { noremap = true })
+nmap('<C-Right>', '<C-w>l', { noremap = true })
 
 -- Meme mappings
-mapNLeader("fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+nmap("<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 -- Quickfix list keymaps
-mapNLeader("qo", "<cmd>copen<CR>", '[Q]uickfix [O]pen')
-mapNLeader("qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
-mapNLeader("qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
-mapNLeader("qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
+nmap("<leader>qo", "<cmd>copen<CR>", '[Q]uickfix [O]pen')
+nmap("<leader>qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
+nmap("<leader>qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
+nmap("<leader>qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
 
-mapNLeader("go", "<cmd>DiffviewOpen<CR>", '[G]it DiffView [O]pen')
-mapNLeader("gc", "<cmd>DiffviewClose<CR>", '[G]it DiffView [C]lose')
--- Refactoring
+-- Which key
+which_register{
+  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+  ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
+  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  ['<leader>sc'] = { name = '[C]ode', _ = 'which_key_ignore' },
+}
