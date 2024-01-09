@@ -77,6 +77,8 @@ nmap("<leader>qo", "<cmd>copen<CR>", '[Q]uickfix [O]pen')
 nmap("<leader>qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
 nmap("<leader>qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
 nmap("<leader>qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
+nmap("<leader>-", "<cmd>Oil<CR>", 'Oil')
+nmap("<leader>-f", "<cmd>Oil --float<CR>", 'Oil floating')
 
 -- Which key
 which_register{

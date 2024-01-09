@@ -16,6 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  'ggandor/leap.nvim',
   'eandrju/cellular-automaton.nvim',
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
@@ -78,6 +79,8 @@ require('lazy').setup({
   },
   { import = 'custom.plugins' },
 }, {})
+
+require('leap').create_default_mappings()
 
 vim.cmd.colorscheme 'rose-pine'
 
@@ -161,9 +164,7 @@ require('telescope').setup {
 }
 
 require("telescope").load_extension('harpoon')
-require("telescope").load_extension('harpoon')
 require("telescope").load_extension('refactoring')
-require('telescope').load_extension('macros')
 
 
 -- Enable telescope fzf native, if installed
@@ -341,6 +342,7 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
+require('custom.snippets')
 
 cmp.setup {
   snippet = {
@@ -352,7 +354,7 @@ cmp.setup {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
