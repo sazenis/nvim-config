@@ -28,22 +28,13 @@ ls.add_snippets("javascript", {
 	})
 })
 
--- ls.add_snippets("javascript", { s("asql", fmt(
---
--- 	[[
--- 	const {} = ({}) => `
--- 		{}
--- 	`;
---
--- 	module.export = {}
--- 	]],{
--- 		i(1),
--- 		i(2),
--- 		f(function ()
--- 			return vim.fn.getreg("")
--- 		end),
--- 		repl(1)
--- 	}))
--- })
---
--- ls.add_snippets("javascript", { s("asql", )
+ls.add_snippets("javascript", {
+	s("servicetestsql", {
+		t({"const database_sf = require('../../database_sf');", '', ''}),
+		t({"jest.mock('../../database_sf');", '', ''}),
+		t('const '), i(1), t(' = ('), i(2), t(') => `'),
+		i(2),
+		t({'`;', '', ''}),
+		t({'module.exports = '}), repl(1), t(';')
+	})
+})
