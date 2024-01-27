@@ -84,10 +84,13 @@ require('leap').create_default_mappings()
 
 vim.cmd.colorscheme 'rose-pine'
 
--- NEOVIDE Configure
-vim.o.guifont = "JetBrainsMono Nerd Font:h9"
--- vim.o.guifont = "JetBrainsMono Nerd Font Mono:h11"
-vim.g.neovide_scroll_animation_length = 0.2
+-- NEOVIDE config
+if vim.g.neovide then
+  vim.o.guifont = "Monaspace Neon:h10"
+  vim.g.neovide_scroll_animation_length = 0.2
+  vim.g.neovide_cursor_vfx_mode = "ripple"
+  vim.opt.linespace = 2
+end
 
 
 -- Set global status line
@@ -152,19 +155,9 @@ require('user_commands')
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
+require('telescope').setup {}
 
 require("telescope").load_extension('harpoon')
-require("telescope").load_extension('refactoring')
 
 
 -- Enable telescope fzf native, if installed
