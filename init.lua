@@ -86,10 +86,10 @@ vim.cmd.colorscheme 'rose-pine'
 
 -- NEOVIDE config
 if vim.g.neovide then
-  vim.o.guifont = "Monaspace Neon:h10"
+  vim.o.guifont = "FiraMono Nerd Font:h10"
   vim.g.neovide_scroll_animation_length = 0.2
   vim.g.neovide_cursor_vfx_mode = "ripple"
-  vim.opt.linespace = 2
+  -- vim.opt.linespace = 2
 end
 
 
