@@ -86,6 +86,7 @@ vim.cmd.colorscheme 'rose-pine'
 
 -- NEOVIDE config
 if vim.g.neovide then
+  vim.g.neovide_scale_factor=1.0
   vim.o.guifont = "FiraMono Nerd Font:h10"
   vim.g.neovide_scroll_animation_length = 0.2
   vim.g.neovide_cursor_vfx_mode = "ripple"
