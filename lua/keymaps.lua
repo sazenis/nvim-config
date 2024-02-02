@@ -80,6 +80,10 @@ nmap("<leader>qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
 nmap("<leader>-", "<cmd>Oil<CR>", 'Oil')
 nmap("<leader>-f", "<cmd>Oil --float<CR>", 'Oil floating')
 
+-- Neotest keymaps 
+nmap("<leader>tr", ":lua require('neotest').run.run()<CR>", "[T]est run")
+nmap("<leader>ts", ":lua require('neotest').summary.toggle()<CR>", "[T]est [S]ummary toggle")
+
 -- Which key
 which_register{
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
@@ -90,4 +94,5 @@ which_register{
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
   ['<leader>sc'] = { name = '[C]ode', _ = 'which_key_ignore' },
+  ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
 }

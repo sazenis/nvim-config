@@ -97,6 +97,7 @@ end
 -- Set global status line
 vim.o.laststatus = 3
 -- vim.o.cmdheight = 0
+vim.o.tabstop=4
 
 -- Set highlight on search
 vim.o.hlsearch = false
