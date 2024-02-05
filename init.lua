@@ -1,4 +1,3 @@
-
 vim.g.mapleader = ' '
 vim.opt.swapfile = false
 
@@ -46,7 +45,7 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     'rose-pine/neovim',
     name = 'rose-pine',
@@ -71,6 +70,14 @@ require('lazy').setup({
     },
   },
   {
+    'LukasPietzschmann/telescope-tabs',
+    config = function()
+      require('telescope').load_extension 'telescope-tabs'
+      require('telescope-tabs').setup {}
+    end,
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -86,7 +93,7 @@ vim.cmd.colorscheme 'rose-pine'
 
 -- NEOVIDE config
 if vim.g.neovide then
-  vim.g.neovide_scale_factor=1.0
+  vim.g.neovide_scale_factor = 1.0
   vim.o.guifont = "FiraMono Nerd Font:h10"
   vim.g.neovide_scroll_animation_length = 0.2
   vim.g.neovide_cursor_vfx_mode = "ripple"
@@ -97,7 +104,7 @@ end
 -- Set global status line
 vim.o.laststatus = 3
 -- vim.o.cmdheight = 0
-vim.o.tabstop=4
+vim.o.tabstop = 4
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -150,7 +157,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-require('bufferline').setup{}
+require('bufferline').setup {}
 require('keymaps');
 require('user_commands')
 
@@ -270,11 +277,6 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -294,7 +296,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -311,12 +313,12 @@ require('neodev').setup({
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   vim.lsp.handlers.hover,
-  {border = 'rounded'}
+  { border = 'rounded' }
 )
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
   vim.lsp.handlers.signature_help,
-  {border = 'rounded'}
+  { border = 'rounded' }
 )
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers

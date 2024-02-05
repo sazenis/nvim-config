@@ -23,10 +23,8 @@ nmap('<leader>sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
 nmap('<leader>sg', teleBuiltin.live_grep, '[S]earch by [G]rep')
 nmap('<leader>sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
 nmap('<leader>sr', teleBuiltin.resume, '[S]earch [R]esume')
-nmap('<leader>s', teleBuiltin.marks, '[S]earch [M]arks')
-
+nmap('<leader>st', "<cmd>:lua require('telescope-tabs').list_tabs()<CR>", '[S]earch [Tabs]')
 nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
-nmap('<leader>cr', function() require('telescope').extensions.refactoring.refactors() end, '[C]ode [R]efactor')
 
 -- Harpoon config
 local harpoonUi = require('harpoon.ui')
