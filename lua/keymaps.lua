@@ -26,6 +26,7 @@ nmap('<leader>sr', teleBuiltin.resume, '[S]earch [R]esume')
 nmap('<leader>st', "<cmd>:lua require('telescope-tabs').list_tabs()<CR>", '[S]earch [Tabs]')
 nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
 
+
 -- Harpoon config
 local harpoonUi = require('harpoon.ui')
 local harpoonMark = require('harpoon.mark')
@@ -78,9 +79,11 @@ nmap("<leader>qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
 nmap("<leader>-", "<cmd>Oil<CR>", 'Oil')
 nmap("<leader>-f", "<cmd>Oil --float<CR>", 'Oil floating')
 
--- Neotest keymaps 
+-- T keymaps 
 nmap("<leader>tr", ":lua require('neotest').run.run()<CR>", "[T]est run")
 nmap("<leader>ts", ":lua require('neotest').summary.toggle()<CR>", "[T]est [S]ummary toggle")
+nmap("<leader>nt", "<cmd>tabnew<CR>", "[T]ab [N]ew ")
+nmap("<leader>nt", "<cmd>tabclose<CR>", "[T]ab [C]lose ")
 
 -- Which key
 which_register{
@@ -90,7 +93,7 @@ which_register{
   ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  ['<leader>n'] = { name = '[N]ew', _ = 'which_key_ignore' },
   ['<leader>sc'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
+  ['<leader>t'] = { name = '[T]est/[T]ab', _ = 'which_key_ignore' },
 }
