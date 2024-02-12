@@ -82,8 +82,12 @@ nmap("<leader>-f", "<cmd>Oil --float<CR>", 'Oil floating')
 -- T keymaps 
 nmap("<leader>tr", ":lua require('neotest').run.run()<CR>", "[T]est run")
 nmap("<leader>ts", ":lua require('neotest').summary.toggle()<CR>", "[T]est [S]ummary toggle")
+nmap("<leader>tc", "<cmd>Coverage<CR>", "[T]est [C]overage")
+nmap("<leader>tt", "<cmd>CoverageToggle<CR>", "[T]est [T]oggle")
+
 nmap("<leader>nt", "<cmd>tabnew<CR>", "[T]ab [N]ew ")
 nmap("<leader>nt", "<cmd>tabclose<CR>", "[T]ab [C]lose ")
+
 
 -- Which key
 which_register{

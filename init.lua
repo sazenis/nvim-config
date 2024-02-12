@@ -84,6 +84,29 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  {
+    "andythigpen/nvim-coverage",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      commands = true, -- create commands
+      highlights = {
+        -- customize highlight groups created by the plugin
+        covered = { fg = "#C3E88D" }, -- supports style, fg, bg, sp (see :h highlight-gui)
+        uncovered = { fg = "#F07178" },
+      },
+      signs = {
+        -- use your own highlight groups or text markers
+        covered = { hl = "CoverageCovered", text = "▎" },
+        uncovered = { hl = "CoverageUncovered", text = "▎" },
+      },
+      summary = {
+        -- customize the summary pop-up
+        min_coverage = 80.0, -- minimum coverage threshold (used for highlighting)
+      },
+    }
+  },
   { import = 'custom.plugins' },
 }, {})
 
@@ -100,6 +123,9 @@ if vim.g.neovide then
   -- vim.opt.linespace = 2
 end
 
+local transparecy = 30;
+vim.o.winblend = transparecy;
+vim.o.pumblend = transparecy;
 
 -- Set global status line
 vim.o.laststatus = 3
@@ -164,13 +190,16 @@ require('user_commands')
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {}
+require('telescope').setup {
+  defaults = {
+    winblend = transparecy
+  }
+}
 
 require("telescope").load_extension('harpoon')
 
-
 -- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+require('telescope').load_extension('fzf')
 
 -- document existing key chains
 
@@ -190,7 +219,7 @@ vim.defer_fn(function()
     auto_install = false,
 
     highlight = { enable = true },
-    indent = { enable = true },
+    -- indent = { enable = true },
     incremental_selection = {
       enable = true,
       keymaps = {
