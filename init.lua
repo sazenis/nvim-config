@@ -190,10 +190,23 @@ require('user_commands')
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local telescopeActions = require("telescope.actions")
 require('telescope').setup {
   defaults = {
     winblend = transparecy
-  }
+  },
+  pickers = {
+    buffers = {
+      mappings = {
+        n = {
+          ["<M-d>"] = telescopeActions.delete_buffer,
+        },
+        i = {
+          ["<M-d>"] = telescopeActions.delete_buffer,
+        },
+      },
+    },
+  },
 }
 
 require("telescope").load_extension('harpoon')
