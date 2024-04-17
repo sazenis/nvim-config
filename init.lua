@@ -75,7 +75,10 @@ require('lazy').setup({
       require('telescope').load_extension 'telescope-tabs'
       require('telescope-tabs').setup {}
     end,
-    dependencies = { 'nvim-telescope/telescope.nvim' },
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      'nvim-telescope/telescope-live-grep-args.nvim'
+    },
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -183,7 +186,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-require('bufferline').setup {}
+-- require('bufferline').setup {}
 require('keymaps');
 require('user_commands')
 
@@ -213,6 +216,7 @@ require("telescope").load_extension('harpoon')
 
 -- Enable telescope fzf native, if installed
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('live_grep_args')
 
 -- document existing key chains
 

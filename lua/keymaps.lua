@@ -22,9 +22,10 @@ nmap('<leader>sh', teleBuiltin.help_tags, '[S]earch [H]elp')
 nmap('<leader>sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
 nmap('<leader>sg', teleBuiltin.live_grep, '[S]earch by [G]rep')
 nmap('<leader>sd', teleBuiltin.diagnostics, '[S]earch [D]iagnostics')
-nmap('<leader>sr', teleBuiltin.resume, '[S]earch [R]esume')
+nmap('<leader>ss', teleBuiltin.resume, '[S]earch last [S]earch')
 nmap('<leader>st', "<cmd>:lua require('telescope-tabs').list_tabs()<CR>", '[S]earch [Tabs]')
 nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
+nmap('<leader>sa', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", '[S]earch live [A]rgs')
 
 
 -- Harpoon config
@@ -60,7 +61,9 @@ nmap('<leader>gf', teleBuiltin.git_files, '[G]it [F]iles')
 nmap('<leader>gs', teleBuiltin.git_status, '[G]it [S]status')
 nmap('<leader>gc', '<cmd>DiffviewClose<CR>', '[G]it DiffView [C]lose')
 nmap('<leader>go', '<cmd>DiffviewOpen<CR>', '[G]it DiffView [O]pen')
+nmap('<leader>gh', '<cmd>DiffviewFileHistory %<CR>', '[G]it current File [H]istory')
 nmap('<leader>gb', teleBuiltin.git_branches, '[G]it [B]branches')
+nmap('<leader>gg', '<cmd>Git<CR>', '[G]it [G]it')
 
 -- Mapping CTRL + Arrow keys for window navigation
 nmap('<C-Up>', '<C-w>k', { noremap = true })
@@ -86,7 +89,7 @@ nmap("<leader>tc", "<cmd>Coverage<CR>", "[T]est [C]overage")
 nmap("<leader>tt", "<cmd>CoverageToggle<CR>", "[T]est [T]oggle")
 
 nmap("<leader>nt", "<cmd>tabnew<CR>", "[T]ab [N]ew ")
-nmap("<leader>nt", "<cmd>tabclose<CR>", "[T]ab [C]lose ")
+nmap("<leader>nc", "<cmd>tabclose<CR>", "[T]ab [C]lose ")
 
 
 -- Which key
