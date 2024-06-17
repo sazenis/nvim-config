@@ -66,10 +66,10 @@ nmap('<leader>gb', teleBuiltin.git_branches, '[G]it [B]branches')
 nmap('<leader>gg', '<cmd>Git<CR>', '[G]it [G]it')
 
 -- Mapping CTRL + Arrow keys for window navigation
-nmap('<C-Up>', '<C-w>k', { noremap = true })
-nmap('<C-Down>', '<C-w>j', { noremap = true })
-nmap('<C-Left>', '<C-w>h', { noremap = true })
-nmap('<C-Right>', '<C-w>l', { noremap = true })
+nmap('<C-Up>', '<C-w>k', 'Window up')
+nmap('<C-Down>', '<C-w>j', 'Window down' )
+nmap('<C-Left>', '<C-w>h', 'Window left')
+nmap('<C-Right>', '<C-w>l', 'Window right')
 
 -- Meme mappings
 nmap("<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")

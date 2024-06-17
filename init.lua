@@ -47,6 +47,10 @@ require('lazy').setup({
   },
   { 'folke/which-key.nvim',  opts = {} },
   {
+      "danymat/neogen",
+      config = true,
+  },
+  {
     'rose-pine/neovim',
     name = 'rose-pine',
     priority = 1000,
