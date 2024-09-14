@@ -130,7 +130,8 @@ if vim.g.neovide then
   -- vim.opt.linespace = 2
 end
 
-local transparecy = 30;
+-- local transparecy = 30;
+local transparecy = 0;
 vim.o.winblend = transparecy;
 vim.o.pumblend = transparecy;
 
