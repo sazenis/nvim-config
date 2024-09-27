@@ -26,6 +26,7 @@ nmap('<leader>ss', teleBuiltin.resume, '[S]earch last [S]earch')
 nmap('<leader>st', "<cmd>:lua require('telescope-tabs').list_tabs()<CR>", '[S]earch [Tabs]')
 nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
 nmap('<leader>sa', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", '[S]earch live [A]rgs')
+nmap('<leader>sp', ":lua require('telescope').extensions.project.project{}<CR>", '[S]earch [P]rojects')
 
 
 -- Harpoon config

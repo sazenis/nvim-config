@@ -85,6 +85,12 @@ require('lazy').setup({
     },
   },
   {
+    'nvim-telescope/telescope-project.nvim',
+    config = function()
+      require'telescope'.load_extension('project')
+    end
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -222,6 +228,7 @@ require("telescope").load_extension('harpoon')
 -- Enable telescope fzf native, if installed
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('live_grep_args')
+-- require('telescope').load_extension('project')
 
 -- document existing key chains
 
