@@ -32,43 +32,10 @@ require('lazy').setup({
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-      -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
-
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
     },
     config = function()
-      -- Brief aside: **What is LSP?**
-      --
-      -- LSP is an initialism you've probably heard, but might not understand what it is.
-      --
-      -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-      -- and language tooling communicate in a standardized fashion.
-      --
-      -- In general, you have a "server" which is some tool built to understand a particular
-      -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-      -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-      -- processes that communicate with some "client" - in this case, Neovim!
-      --
-      -- LSP provides Neovim with features like:
-      --  - Go to definition
-      --  - Find references
-      --  - Autocompletion
-      --  - Symbol Search
-      --  - and more!
-      --
-      -- Thus, Language Servers are external tools that must be installed separately from
-      -- Neovim. This is where `mason` and related plugins come into play.
-      --
-      -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-      -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-      --  This function gets run when an LSP attaches to a particular buffer.
-      --    That is to say, every time a new file is opened that is associated with
-      --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-      --    function will be executed to configure the current buffer
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -132,11 +99,6 @@ require('lazy').setup({
             end
           end
 
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
@@ -173,8 +135,6 @@ require('lazy').setup({
         end,
       })
 
-      -- Diagnostic Config
-      -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
@@ -202,10 +162,6 @@ require('lazy').setup({
         },
       }
 
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Enable the following language servers
@@ -283,7 +239,8 @@ require('lazy').setup({
     end,
   },
 
-  { 'stevearc/conform.nvim',
+  {
+    'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
@@ -436,7 +393,7 @@ require('lazy').setup({
       },
     },
     config = function()
-      local telescopeActions = require("telescope.actions")
+      local telescopeActions = require 'telescope.actions'
       require('telescope').setup {
         defaults = {
           winblend = 0,
@@ -445,25 +402,25 @@ require('lazy').setup({
           buffers = {
             mappings = {
               n = {
-                ["<M-d>"] = telescopeActions.delete_buffer,
+                ['<M-d>'] = telescopeActions.delete_buffer,
               },
               i = {
-                ["<M-d>"] = telescopeActions.delete_buffer,
+                ['<M-d>'] = telescopeActions.delete_buffer,
               },
             },
           },
         },
       }
-      require("telescope").load_extension('fzf')
-      require("telescope").load_extension('live_grep_args')
-      require("telescope").load_extension('harpoon')
+      require('telescope').load_extension 'fzf'
+      require('telescope').load_extension 'live_grep_args'
+      require('telescope').load_extension 'harpoon'
     end,
   },
   {
     'LukasPietzschmann/telescope-tabs',
     dependencies = {
       'nvim-telescope/telescope.nvim',
-      'nvim-telescope/telescope-live-grep-args.nvim'
+      'nvim-telescope/telescope-live-grep-args.nvim',
     },
     config = function()
       require('telescope').load_extension 'telescope-tabs'
@@ -474,7 +431,7 @@ require('lazy').setup({
     'nvim-telescope/telescope-project.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
-      require('telescope').load_extension('project')
+      require('telescope').load_extension 'project'
     end,
   },
   -- Treesitter
@@ -497,9 +454,9 @@ require('lazy').setup({
     'j-hui/fidget.nvim',
     opts = {
       notification = {
-        override_vim_notify = true
-      }
-    }
+        override_vim_notify = true,
+      },
+    },
   },
   {
     'rose-pine/neovim',
@@ -513,23 +470,23 @@ require('lazy').setup({
     end,
   },
   {
-    "danymat/neogen",
+    'danymat/neogen',
     config = true,
   },
   {
-    "andythigpen/nvim-coverage",
+    'andythigpen/nvim-coverage',
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      'nvim-lua/plenary.nvim',
     },
     opts = {
       commands = true,
       highlights = {
-        covered = { fg = "#C3E88D" },
-        uncovered = { fg = "#F07178" },
+        covered = { fg = '#C3E88D' },
+        uncovered = { fg = '#F07178' },
       },
       signs = {
-        covered = { hl = "CoverageCovered", text = "▎" },
-        uncovered = { hl = "CoverageUncovered", text = "▎" },
+        covered = { hl = 'CoverageCovered', text = '▎' },
+        uncovered = { hl = 'CoverageUncovered', text = '▎' },
       },
       summary = {
         min_coverage = 80.0,
@@ -545,15 +502,15 @@ require('leap').create_default_mappings()
 -- Neovide Configuration
 if vim.g.neovide then
   vim.g.neovide_scale_factor = 1.0
-  vim.o.guifont = "FiraMono Nerd Font:h10"
+  vim.o.guifont = 'FiraMono Nerd Font:h10'
   vim.g.neovide_scroll_animation_length = 0.2
-  vim.g.neovide_cursor_vfx_mode = "ripple"
+  vim.g.neovide_cursor_vfx_mode = 'ripple'
 end
 
 -- Transparency Settings
-local transparecy = 0;
-vim.o.winblend = transparecy;
-vim.o.pumblend = transparecy;
+local transparecy = 0
+vim.o.winblend = transparecy
+vim.o.pumblend = transparecy
 
 -- Global Status Line
 vim.o.laststatus = 3
@@ -594,5 +551,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- User Keymaps and Commands
-require('keymaps')
-require('user_commands')
+require 'keymaps'
+require 'user_commands'
