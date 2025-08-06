@@ -489,11 +489,11 @@ require('lazy').setup({
   {
     'rmagatti/auto-session',
     lazy = false,
-    keys = {
-      { '<leader>wr', '<cmd>SessionSearch<CR>', desc = 'Session search' },
-      { '<leader>ws', '<cmd>SessionSave<CR>', desc = 'Save session' },
-      { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
-    },
+    -- keys = {
+    --   { '<leader>wr', '<cmd>SessionSearch<CR>', desc = 'Session search' },
+    --   -- { '<leader>ws', '<cmd>SessionSave<CR>', desc = 'Save session' },
+    --   -- { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
+    -- },
     opts = {
       auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
     },

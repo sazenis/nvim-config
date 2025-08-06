@@ -27,6 +27,9 @@ nmap('<leader>st', "<cmd>:lua require('telescope-tabs').list_tabs()<CR>", '[S]ea
 nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
 nmap('<leader>sa', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", '[S]earch live [A]rgs')
 
+-- session
+nmap('<leader>sp', '<cmd>SessionSearch<CR>', 'Session search')
+
 -- Harpoon config
 local harpoonUi = require 'harpoon.ui'
 local harpoonMark = require 'harpoon.mark'
