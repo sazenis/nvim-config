@@ -1,22 +1,22 @@
 local function nmap(key, action, desc, opts)
-    local options = { noremap = true, silent = true }
-    if desc then
-        options.desc = desc
-    end
-    if opts then
-        options = vim.tbl_extend('force', options, opts)
-    end
-    vim.keymap.set('n', key, action, options)
+  local options = { noremap = true, silent = true }
+  if desc then
+    options.desc = desc
+  end
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.keymap.set('n', key, action, options)
 end
 
-local which_register = require("which-key").register;
+local which_register = require('which-key').register
 
 --- Telescope
-local teleBuiltin = require('telescope.builtin')
+local teleBuiltin = require 'telescope.builtin'
 
 nmap('<leader>?', teleBuiltin.oldfiles, '[?] Find recently opened files')
 nmap('<leader><space>', teleBuiltin.buffers, '[ ] Find existing buffers')
-nmap('<leader>b', teleBuiltin.current_buffer_fuzzy_find , '[/] Fuzzily search in current buffer')
+nmap('<leader>b', teleBuiltin.current_buffer_fuzzy_find, '[/] Fuzzily search in current buffer')
 nmap('<leader>sf', teleBuiltin.find_files, '[S]earch [F]iles')
 nmap('<leader>sh', teleBuiltin.help_tags, '[S]earch [H]elp')
 nmap('<leader>sw', teleBuiltin.grep_string, '[S]earch current [W]ord')
@@ -26,12 +26,10 @@ nmap('<leader>ss', teleBuiltin.resume, '[S]earch last [S]earch')
 nmap('<leader>st', "<cmd>:lua require('telescope-tabs').list_tabs()<CR>", '[S]earch [Tabs]')
 nmap('<leader>sr', teleBuiltin.lsp_references, '[S]earch [R]eferences')
 nmap('<leader>sa', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", '[S]earch live [A]rgs')
-nmap('<leader>sp', ":lua require('telescope').extensions.project.project{}<CR>", '[S]earch [P]rojects')
-
 
 -- Harpoon config
-local harpoonUi = require('harpoon.ui')
-local harpoonMark = require('harpoon.mark')
+local harpoonUi = require 'harpoon.ui'
+local harpoonMark = require 'harpoon.mark'
 
 nmap('<leader>ha', harpoonMark.add_file, '[H]arpoon [A]dd')
 nmap('<leader>hn', harpoonUi.nav_next, '[H]arpoon [N]ext')
@@ -39,15 +37,33 @@ nmap('<leader>hp', harpoonUi.nav_prev, '[H]arpoon [P]rev')
 nmap('<leader>hm', '<CMD>Telescope harpoon marks<CR>', '[H]arpoon [M]marks')
 nmap('<leader>hh', harpoonUi.toggle_quick_menu, '[S]earch [H]arpoon')
 
-nmap('<M-q>', function() require('harpoon.ui').nav_file(1) end)
-nmap('<M-w>', function() require('harpoon.ui').nav_file(2) end)
-nmap('<M-e>', function() require('harpoon.ui').nav_file(3) end)
-nmap('<M-r>', function() require('harpoon.ui').nav_file(4) end)
-nmap('<M-t>', function() require('harpoon.ui').nav_file(5) end)
-nmap('<M-y>', function() require('harpoon.ui').nav_file(6) end)
-nmap('<M-u>', function() require('harpoon.ui').nav_file(7) end)
-nmap('<M-i>', function() require('harpoon.ui').nav_file(8) end)
-nmap('<M-o>', function() require('harpoon.ui').nav_file(9) end)
+nmap('<M-q>', function()
+  require('harpoon.ui').nav_file(1)
+end)
+nmap('<M-w>', function()
+  require('harpoon.ui').nav_file(2)
+end)
+nmap('<M-e>', function()
+  require('harpoon.ui').nav_file(3)
+end)
+nmap('<M-r>', function()
+  require('harpoon.ui').nav_file(4)
+end)
+nmap('<M-t>', function()
+  require('harpoon.ui').nav_file(5)
+end)
+nmap('<M-y>', function()
+  require('harpoon.ui').nav_file(6)
+end)
+nmap('<M-u>', function()
+  require('harpoon.ui').nav_file(7)
+end)
+nmap('<M-i>', function()
+  require('harpoon.ui').nav_file(8)
+end)
+nmap('<M-o>', function()
+  require('harpoon.ui').nav_file(9)
+end)
 
 -- Diagnostic keymaps
 local vDiag = vim.diagnostic
@@ -68,33 +84,32 @@ nmap('<leader>gg', '<cmd>Git<CR>', '[G]it [G]it')
 
 -- Mapping CTRL + Arrow keys for window navigation
 nmap('<C-Up>', '<C-w>k', 'Window up')
-nmap('<C-Down>', '<C-w>j', 'Window down' )
+nmap('<C-Down>', '<C-w>j', 'Window down')
 nmap('<C-Left>', '<C-w>h', 'Window left')
 nmap('<C-Right>', '<C-w>l', 'Window right')
 
 -- Meme mappings
-nmap("<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+nmap('<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
 
 -- Quickfix list keymaps
-nmap("<leader>qo", "<cmd>copen<CR>", '[Q]uickfix [O]pen')
-nmap("<leader>qc", "<cmd>ccl<CR>", '[Q]uickfix [C]lose')
-nmap("<leader>qn", "<cmd>cn<CR>", '[Q]uickfix [N]ext')
-nmap("<leader>qp", "<cmd>cp<CR>", '[Q]uickfix [P]rev')
-nmap("<leader>-", "<cmd>Oil<CR>", 'Oil')
-nmap("<leader>-f", "<cmd>Oil --float<CR>", 'Oil floating')
+nmap('<leader>qo', '<cmd>copen<CR>', '[Q]uickfix [O]pen')
+nmap('<leader>qc', '<cmd>ccl<CR>', '[Q]uickfix [C]lose')
+nmap('<leader>qn', '<cmd>cn<CR>', '[Q]uickfix [N]ext')
+nmap('<leader>qp', '<cmd>cp<CR>', '[Q]uickfix [P]rev')
+nmap('<leader>-', '<cmd>Oil<CR>', 'Oil')
+nmap('<leader>-f', '<cmd>Oil --float<CR>', 'Oil floating')
 
--- T keymaps 
-nmap("<leader>tr", ":lua require('neotest').run.run()<CR>", "[T]est run")
-nmap("<leader>ts", ":lua require('neotest').summary.toggle()<CR>", "[T]est [S]ummary toggle")
-nmap("<leader>tc", "<cmd>Coverage<CR>", "[T]est [C]overage")
-nmap("<leader>tt", "<cmd>CoverageToggle<CR>", "[T]est [T]oggle")
+-- T keymaps
+nmap('<leader>tr', ":lua require('neotest').run.run()<CR>", '[T]est run')
+nmap('<leader>ts', ":lua require('neotest').summary.toggle()<CR>", '[T]est [S]ummary toggle')
+nmap('<leader>tc', '<cmd>Coverage<CR>', '[T]est [C]overage')
+nmap('<leader>tt', '<cmd>CoverageToggle<CR>', '[T]est [T]oggle')
 
-nmap("<leader>nt", "<cmd>tabnew<CR>", "[T]ab [N]ew ")
-nmap("<leader>nc", "<cmd>tabclose<CR>", "[T]ab [C]lose ")
-
+nmap('<leader>nt', '<cmd>tabnew<CR>', '[T]ab [N]ew ')
+nmap('<leader>nc', '<cmd>tabclose<CR>', '[T]ab [C]lose ')
 
 -- Which key
-which_register{
+which_register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },

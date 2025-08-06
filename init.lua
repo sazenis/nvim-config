@@ -427,13 +427,6 @@ require('lazy').setup({
       require('telescope-tabs').setup {}
     end,
   },
-  {
-    'nvim-telescope/telescope-project.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = function()
-      require('telescope').load_extension 'project'
-    end,
-  },
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
@@ -493,7 +486,21 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'rmagatti/auto-session',
+    lazy = false,
+    keys = {
+      { '<leader>wr', '<cmd>SessionSearch<CR>', desc = 'Session search' },
+      { '<leader>ws', '<cmd>SessionSave<CR>', desc = 'Save session' },
+      { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
+    },
+    opts = {
+      auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+    },
+  },
   { import = 'custom.plugins' },
+  -- Copilot stuff
+  { 'zbirenbaum/copilot.lua' },
 }, {})
 
 -- Leap Default Mapping
